@@ -14,10 +14,7 @@ int main(void)
     while (true)
     {
 	usr_input = prompt();
-	printf("First print test: %s\n", usr_input);
 	input_tokens = parser(usr_input);
-	for (i = 0; input_tokens[i] != NULL; i++)
-	    printf("%s", input_tokens[i]);
     }
     return (0);
 }

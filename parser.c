@@ -15,26 +15,28 @@ char **parser (char *input)
     
     /*Getting number of tokens*/
     temp = _strdup(input);
-    printf("line 18 in parser: %s\n", temp);
     temp_token = strtok(temp, delim);
-    count = 1;
+    count = 0;
     while(temp_token != NULL)
     {
-	temp_token = strtok(NULL, delim);
 	count++;
+	temp_token = strtok(NULL, delim);
     }
-    printf("line 26 in parser: %d\n", count);
 
     /*Tokenizing user input*/
-    tokens = malloc((++count) * sizeof(char *));
+    tokens = malloc((count + 1) * sizeof(char *));
     if (tokens == NULL)
     {
 	perror("Dynamic memory allocation has failed!");
 	return (NULL);
     }
+    i = 0;
     tokens[i] = strtok(input, delim);
-    for(i = 0; tokens[i] != NULL; i++)
+    for(i = 1; tokens[i] != NULL; i++)
+    {
+	printf("Tokens (%d) is: %s", i, tokens[i]);
 	tokens[i] = strtok(NULL, delim);
+    }
     free(temp);
     return (tokens);
 }
