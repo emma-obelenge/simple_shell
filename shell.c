@@ -15,6 +15,15 @@ int main(void)
     {
 	usr_input = prompt();
 	input_tokens = parser(usr_input);
+	i = 0;
+	while(input_tokens != NULL)
+	{
+	    printf("token %d is: %s\n", i, input_tokens[i]);
+	    i++;
+	}
+
+
+	free(input_tokens);
     }
     return (0);
 }

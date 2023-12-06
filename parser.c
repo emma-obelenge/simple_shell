@@ -32,9 +32,9 @@ char **parser (char *input)
     }
     i = 0;
     tokens[i] = strtok(input, delim);
-    for(i = 1; tokens[i] != NULL; i++)
+    while(tokens[i] != NULL)
     {
-	printf("Tokens (%d) is: %s", i, tokens[i]);
+	i++;
 	tokens[i] = strtok(NULL, delim);
     }
     free(temp);
