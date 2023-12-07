@@ -7,25 +7,15 @@
  */
 int main(void)
 {
-    char *usr_input;
-    struct strArr_int input_tokens;
-    int i, j;
+	struct strArr_int input_tokens;
+	char *usr_input;
 
-    while (true)
-    {
-	usr_input = prompt();
-	input_tokens = parser(usr_input);
-	i = 0;
-	while(input_tokens.tokens[i] != NULL)
+	while (true)
 	{
-	    printf("token %d is: %s\n", i, input_tokens.tokens[i]);
-	    i++;
+		usr_input = prompt();
+		input_tokens = parser(usr_input);
+		free(input_tokens.tokens);
+		free(usr_input);
 	}
-	printf("token count is: %d\n", input_tokens.tok_count);
-	/*for(j = 0; input_tokens.tokens[j] != NULL; j++)
-	    free(input_tokens.tokens[j]);*/
-	free(input_tokens.tokens);
-	free(usr_input);
-    }
-    return (0);
+	return (0);
 }
