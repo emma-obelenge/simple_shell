@@ -10,8 +10,14 @@
 int _strlen(char *s);
 char *prompt(void);
 char *input(void);
-char **parser(char *input);
+struct strArr_int parser(char *input);
 char *_strcpy(char *src, char *dest);
 char *_strdup(char *str);
+
+struct strArr_int
+{
+    char **tokens;
+    int tok_count;
+};
 
 #endif

@@ -1,13 +1,14 @@
 #include "shell.h"
 /**
- * parser - Breaks the user input into tokens
+ * parse - Breaks the user input into tokens
  * @input: the user typed string
  *
  * Return: Function returns pointer to a dynamic
  * array of strings entered by the user, else NULL.
  */
-char **parser (char *input)
+struct strArr_int parser (char *input)
 {
+    struct strArr_int parse;
     char **tokens;
     int i, count;
     char *temp_token, *temp;
@@ -16,7 +17,9 @@ char **parser (char *input)
     if (input == NULL)
     {
 	printf("input is NULL");
-	return (NULL);
+	parse.tokens = NULL;
+	parse.tok_count = 0;
+	return (parse);
     }
     /*Getting number of tokens*/
     temp = _strdup(input);
@@ -29,11 +32,13 @@ char **parser (char *input)
     }
 
     /*Tokenizing user input*/
-    tokens = malloc(count * sizeof(char *));
+    tokens = malloc((count + 1) * sizeof(char *));
     if (tokens == NULL)
     {
 	perror("Dynamic memory allocation has failed!");
-	return (NULL);
+	parse.tokens = NULL;
+	parse.tok_count = 0;
+	return (parse);
     }
     i = 0;
     tokens[i] = strtok(input, delim);
@@ -43,5 +48,7 @@ char **parser (char *input)
 	tokens[i] = strtok(NULL, delim);
     }
     free(temp);
-    return (tokens);
+    parse.tokens = tokens;
+    parse.tok_count = count;
+    return (parse);
 }
