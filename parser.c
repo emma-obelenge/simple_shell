@@ -12,7 +12,12 @@ char **parser (char *input)
     int i, count;
     char *temp_token, *temp;
     char delim[] = " ";
-    
+
+    if (input == NULL)
+    {
+	printf("input is NULL");
+	return (NULL);
+    }
     /*Getting number of tokens*/
     temp = _strdup(input);
     temp_token = strtok(temp, delim);
@@ -24,7 +29,7 @@ char **parser (char *input)
     }
 
     /*Tokenizing user input*/
-    tokens = malloc((count + 1) * sizeof(char *));
+    tokens = malloc(count * sizeof(char *));
     if (tokens == NULL)
     {
 	perror("Dynamic memory allocation has failed!");
