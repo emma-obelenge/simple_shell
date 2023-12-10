@@ -7,12 +7,12 @@
  */
 void builtin_exec(char **usr_cmd, int _case, char *untokenized_str_buf)
 {
-	if (_case > 0 && _case < 6)
+	if (_case >= 0 && _case < 6)
 	{
 		switch (_case)
 		{
 			case 0:
-				/*env call*/
+				/*cd call*/
 				_cd();
 				break;
 			case 1:

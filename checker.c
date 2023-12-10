@@ -14,16 +14,16 @@ int checker(strArr_int tokensNcount, int *builtin_value, char **found_path)
 	int status;
 
 	status = find_builtin(tokensNcount.tokens);
-	if (status > 0 && status < 6)
+	if (status >= 0 && status < 5)
 	{
-		*builtin_value = status - 1;
+		*builtin_value = status;
 		return (status);
 	}
 	else
 	{
 		status = find_exec(tokensNcount.tokens[0], found_path);
 		if (status == 0)
-			return (status);
+			return (6);
 		else
 			return (-1);
 	}
@@ -55,7 +55,7 @@ int find_builtin(char **usr_cmd)
 				builtin_exit();
 			}
 			*/
-			return (i + 1);
+			return (i);
 		}
 		i++;
 	}

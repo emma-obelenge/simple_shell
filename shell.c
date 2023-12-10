@@ -18,11 +18,13 @@ int main(void)
 		usr_input = prompt();
 		tokensNcount = parser(usr_input);
 		checker_report = checker(tokensNcount, &builtin_value, &found_path);
-		if (checker_report > 0 && checker_report < 6)
+		if (checker_report >= 0 && checker_report < 5)
+		{
 			builtin_exec(tokensNcount.tokens, builtin_value, usr_input);
-		else if (checker_report == 0)
-			/*cmd_exec(tokensNcount.tokens, found_path);*/
+		}
+		else if(checker_report == 6)
 			;
+			/*cmd_exec(tokensNcount.tokens, found_path);*/
 		else
 		{
 			_putsXnewline("tokensNcount.tokens");
@@ -30,9 +32,11 @@ int main(void)
 			free(tokensNcount.tokens);
 			free(usr_input);
 		}
-		free(tokensNcount.tokens);
+		/*free(tokensNcount.tokens);*/
 		free(usr_input);
 		free(found_path);
+		usr_input = NULL;
+		found_path = NULL;
 	}
 	return (0);
 }
