@@ -3,9 +3,9 @@
  * inputIsNull - For returning NULL when input equals NULL
  * Return: Returns struct type data with array of strings = NULL
  */
-void inputIsNull(void)
+strArr_int inputIsNull(strArr_int parse)
 {
-	printf("input is NULL");
+	_putsXnewline("input is NULL");
 	parse.tokens = NULL;
 	parse.tok_count = 0;
 	return (parse);
@@ -26,7 +26,7 @@ struct strArr_int parser(char *input)
 	char delim[] = " ";
 
 	if (input == NULL)
-		return (inputIsNull());
+		return (inputIsNull(parse));
 
 	/*Getting number of tokens*/
 	temp = _strdup(input);

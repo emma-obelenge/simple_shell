@@ -15,6 +15,6 @@ char *prompt(void)
 	/*Taking user input*/
 	input_str = input();
 	if (input_str == NULL)
-		exit(EXIT_FAILURE);
+		_exit(EXIT_FAILURE);
 	return (input_str);
 }
