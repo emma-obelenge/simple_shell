@@ -15,10 +15,9 @@ char *input(void)
 	if (len == -1)
 	{
 		free(buf);
-		return (NULL);
+		buf = NULL;
+		return (buf);
 	}
-
-	buf[len - 1] = '\0';
-
+	buf[len] = '\0';
 	return (buf);
 }

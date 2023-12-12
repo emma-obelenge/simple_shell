@@ -5,7 +5,6 @@
  */
 strArr_int inputIsNull(strArr_int parse)
 {
-	_putsXnewline("input is NULL");
 	parse.tokens = NULL;
 	parse.tok_count = 0;
 	return (parse);
@@ -17,9 +16,9 @@ strArr_int inputIsNull(strArr_int parse)
  * Return: Function returns pointer to a dynamic
  * array of strings entered by the user, else NULL.
  */
-struct strArr_int parser(char *input)
+strArr_int parser(char *input)
 {
-	struct strArr_int parse;
+	strArr_int parse;
 	char **tokens;
 	int i, count;
 	char *temp_token, *temp;
@@ -43,6 +42,8 @@ struct strArr_int parser(char *input)
 	if (tokens == NULL)
 	{
 		perror("Dynamic memory allocation has failed!");
+		free(tokens);
+		tokens = NULL;
 		parse.tokens = NULL;
 		parse.tok_count = 0;
 		return (parse);
