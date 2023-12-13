@@ -2,6 +2,8 @@
 
 /**
  * prompt - Would print a custom prompt on screen
+ *
+ * Return: user input
  */
 char *prompt(void)
 {
@@ -10,9 +12,9 @@ char *prompt(void)
 
 	content = "cisfun$ ";
 	write(1, content, _strlen(content));
-	
+
 	/*
-	   Taking user input
+	 * Taking user input
 	 */
 	input_str = input();
 	if (input_str == NULL)

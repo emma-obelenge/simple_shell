@@ -27,21 +27,23 @@ int _strlen(char *str)
  */
 char *_strdup(char *str)
 {
-    char *s;
-    unsigned int size;
-    if (str == NULL)
-	return (NULL);
-    size = _strlen(str) + 1;
-    
-    /*Allocating dynamic memory for string*/
-    s = (char *)malloc(size);
-    
-    /*Condition for allocation that did not succeed*/
-    if (s == NULL)
-	return (NULL);
-    
-    /*Copy contents of str into s*/
-    return (_strcpy(s, str));
+	char *s;
+	unsigned int size;
+
+	if (str == NULL)
+		return (NULL);
+
+	size = _strlen(str) + 1;
+
+	/*Allocating dynamic memory for string*/
+	s = (char *)malloc(size);
+
+	/*Condition for allocation that did not succeed*/
+	if (s == NULL)
+		return (NULL);
+
+	/*Copy contents of str into s*/
+	return (_strcpy(s, str));
 }
 
 /**
@@ -52,12 +54,13 @@ char *_strdup(char *str)
  */
 char *_strcpy(char *dest, char *src)
 {
-    int i = 0;
-    while (src[i] != '\0')
-    {
-	dest[i] = src[i];
-	i++;
-    }
-    dest[i] = '\0';
-    return (dest);
+	int i = 0;
+
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
