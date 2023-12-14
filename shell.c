@@ -7,43 +7,36 @@
  */
 int main(void)
 {
-
+	char **cmd_arr;
+	char *usr_input = NULL, *found_path = NULL; 
 	while (true)
 	{
-		strArr_int tokensNcount;
-		char *usr_input;
-		char *found_path;
-		int builtin_value, checker_report;
-
-		usr_input = NULL;
-		found_path = NULL;
-		builtin_value = -1;
+		int checker_report = -1, builtin_value = -1;
+		int *value = &builtin_value;
 		usr_input = prompt();
-		tokensNcount = parser(usr_input);
-		if (tokensNcount.tokens = NULL)
-			_exit(EXIT_FAILURE);
-		checker_report = checker(tokensNcount, &builtin_value, &found_path);
-		if (checker_report >= 0 && checker_report < 5)
+		if (usr_input == NULL)
+			continue;
+		cmd_arr = parser(usr_input);
+		checker_report = checker(cmd_arr, value);
+		if (checker_report == 0)
 		{
-			builtin_exec(tokensNcount.tokens, builtin_value, usr_input);
-			call_free(tokensNcount.tokens);
-
+			builtin_exec(cmd_arr, builtin_value);
 		}
-		else if(checker_report == 6)
-			printf("execve will be called here");
-			/*cmd_exec(tokensNcount.tokens, found_path);*/
 		else
 		{
-			_putsXnewline("tokensNcount.tokens");
-			_putsXnewline(": command not found\n");
-			free(tokensNcount.tokens);
-			free(usr_input);
+			printf("just before execve");
+			builtin_value = find_exec(cmd_arr[0], &found_path);
+			/*cmd_exe*/
+			printf("execve will be called here");
+			/*call_free(status1, cmd_arr, found_path);*/
+			free_buf(cmd_arr, found_path, 1);
 		}
-		/*free(tokensNcount.tokens);*/
-		free(usr_input);
-		free(found_path);
-		usr_input = NULL;
-		found_path = NULL;
+		if (builtin_value == -1)
+		{
+			_putsXnewline("cmd_arr[0]");
+			_putsXnewline(": command not found\n");
+			free_buf(cmd_arr, found_path, 1);
+		}
 	}
 	return (0);
 }
