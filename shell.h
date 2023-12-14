@@ -14,10 +14,15 @@ struct strArr_int parser(char *input);
 char *_strcpy(char *src, char *dest);
 char *_strdup(char *str);
 
+/**
+  * struct strArr_int - data structure for tokenize user input
+  * @tokens: array of tokens. i.e. commands
+  * @tok_count: number of tokens
+  */
 struct strArr_int
 {
-    char **tokens;
-    int tok_count;
+	char **tokens;
+	int tok_count;
 };
 
 #endif

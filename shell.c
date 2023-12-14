@@ -9,7 +9,7 @@ int main(void)
 {
 	char *usr_input;
 	struct strArr_int input_tokens;
-	int i, j;
+	int i;
 
 	while (true)
 	{
