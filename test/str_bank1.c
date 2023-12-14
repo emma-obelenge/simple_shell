@@ -7,7 +7,7 @@
  * Return: The string length is returned
  */
 
-int _strlen(char *str)
+int _strlen(const char *str)
 {
 	int len = 0;
 
@@ -94,22 +94,19 @@ void _strapp(char *dest, char *src, int dest_len)
  */
 int _strcmp(char *str1, char *str2)
 {
-	int status, i;
-	
-	status = -1;
-	i = 0;
-	if (_strlen(str1) != _strlen(str2))
-		return (status);
-	while (*(str1 + i))
+	int i = 0;
+	while (str1[i] != '\0' && str2[i] != '\0')
 	{
-		if (*(str1 + i) != *(str2 + i))
+		if (str1[i] != str2[i])
 		{
-			status = -1;
-			break;
+			return -1;
 		}
-		else
-			status = 0;
 		i++;
 	}
-	return (status);
+	/* Check if both strings have the same length*/
+	if (str1[i] != '\0' || str2[i] != '\0')
+	{
+		return -1;
+	}
+	return 0;
 }

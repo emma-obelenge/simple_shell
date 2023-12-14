@@ -7,48 +7,37 @@
  */
 int main(void)
 {
-	char **cmd_arr;
-	char *usr_input = NULL, *found_path = NULL;
-	int builtin_value = -1, checker_report;
-
+	char **cmd_arr = NULL;
+	char *usr_input = NULL, *found_path = NULL; 
 	while (true)
 	{
+		int checker_report = -1, builtin_value = -1;
+		int *value = &builtin_value, i = 0;
+
 		usr_input = prompt();
-		printf("usr_input is: %s", usr_input);
-		/*
-		   cmd_arr = parser(usr_input);
-		if (cmd_arr == NULL)
+		if (usr_input == NULL)
 			continue;
-			*/
-		/****
-		i = 0;
-		   while (*(usr_input + 1))
-		{
-		{
-			printf("input %d is: %s\n", i, cmd_arr[i]);
-			i++;
-		}
-		*****/
-		/*
-		checker_report = checker(cmd_arr, &builtin_value, &found_path);
-		if (checker_report >= 0 && checker_report < 5)
+		cmd_arr = parser(usr_input);
+		for (; cmd_arr[i]; i++)
+			printf("cmd_arr[%d] is: %s", i, cmd_arr[i]);
+		checker_report = checker(cmd_arr, value);
+		if (checker_report == 0)
 		{
 			builtin_exec(cmd_arr, builtin_value);
-			call_free(0, cmd_arr, found_path);
-		}
-		else if(checker_report == 6)
-		{
-			/cmd_exe/
-			printf("execve will be called here");
-			/call_free(status1, cmd_arr, found_path);/
 		}
 		else
 		{
-			_putsXnewline("cmd_arr[0]");
-			_putsXnewline(": command not found\n");
-			call_free(0, cmd_arr, found_path);
+			builtin_value = find_exec(cmd_arr, &found_path);
 		}
-		*/
+			/*cmd_exe*/
+		if (builtin_value == 5)
+		{
+			exec(cmd_arr, found_path);
+			continue;
+		}
+		_printf("%s: %d: not found\n", cmd_arr[0], 1);
+		free_buf(cmd_arr, NULL, 0);
+		free_buf(NULL, found_path, 1);
 	}
 	return (0);
 }

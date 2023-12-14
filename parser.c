@@ -12,6 +12,7 @@ char **parser(char *input)
 	char **tokens;
 	int i = 0, count;
 	char delim[] = " ";
+	char *tok;
 
 	/*Getting number of tokens*/
 	count = tok_count(input);
@@ -27,7 +28,15 @@ char **parser(char *input)
 	while (tokens[i] != NULL)
 	{
 		i++;
-		tokens[i] = _strdup(strtok(NULL, delim));
+		tok = strtok(NULL, delim);
+		if (tok != NULL)
+		{
+			tokens[i] = _strdup(tok);
+		}
+		else
+		{
+			break;
+		}
 	}
 	if (input != NULL)
 	{
@@ -45,7 +54,7 @@ char **parser(char *input)
  */
 int tok_count(char *input)
 {
-	char *temp_token, *temp;
+	char *temp_token, *temp = NULL;
 	int count;
 	char delim[] = " ";
 	

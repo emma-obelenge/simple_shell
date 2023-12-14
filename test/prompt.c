@@ -6,25 +6,28 @@
  */
 char *prompt(void)
 {
-	char *content;
-	char *input_str;
+	const char *content = "cisfun$ ";
+	char *input_str = NULL;
 	int str_len;
+	ssize_t bytes;
 
-	content = "cisfun$ ";
-	write(1, content, _strlen(content));
-
+	bytes = write(1, content, _strlen(content));
+	if (bytes == -1)
+	{
+		perror("prompt display failed");
+		return (NULL);
+	}
 	/*Taking user input*/
-	input_str = NULL;
 	str_len = input(&input_str);
 	if (str_len == -1)
 	{
 		free(input_str);
-		_putchar('\n');
 		_exit(EXIT_FAILURE);
 	}
-	if (*input_str == '\0')
+	if (*input_str  == '\0')
 	{
 		free(input_str);
+		input_str = NULL;
 		return (NULL);
 	}
 	return (input_str);
@@ -41,16 +44,18 @@ int input(char **input_str)
 	ssize_t len;
 	int i;
 
+	i = 0;
 	len = getline(input_str, &n, stdin);
 	if (len == -1)
 		return (-1);
-	while (*(*input_str + i))
+	while ((*(*input_str + i) != '\0'))
 	{
 		if (*(*input_str + i) == '\n')
 		{
-			*(*input_str + i) = '\0';
+			(*input_str)[i] = '\0';
+			break;
 		}
 		i++;
 	}
-	return (len);
+	return (i);
 }

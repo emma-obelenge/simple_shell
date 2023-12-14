@@ -10,11 +10,9 @@
 char **parser(char *input)
 {
 	char **tokens;
-	int i, count;
+	int i = 0, count;
 	char delim[] = " ";
-
-	if (input == NULL)
-		return (NULL);
+	char *tok;
 
 	/*Getting number of tokens*/
 	count = tok_count(input);
@@ -26,14 +24,25 @@ char **parser(char *input)
 		perror("Dynamic memory allocation for parser failed!");
 		_exit(EXIT_FAILURE);
 	}
-	i = 0;
 	tokens[i] = _strdup(strtok(input, delim));
 	while (tokens[i] != NULL)
 	{
 		i++;
-		tokens[i] = _strdup(strtok(NULL, delim));
+		tok = strtok(NULL, delim);
+		if (tok != NULL)
+		{
+			tokens[i] = _strdup(tok);
+		}
+		else
+		{
+			break;
+		}
 	}
-	free(input);
+	if (input != NULL)
+	{
+		free(input);
+		input = NULL;
+	}
 	return (tokens);
 }
 
@@ -45,7 +54,7 @@ char **parser(char *input)
  */
 int tok_count(char *input)
 {
-	char *temp_token, *temp;
+	char *temp_token, *temp = NULL;
 	int count;
 	char delim[] = " ";
 	
@@ -57,7 +66,10 @@ int tok_count(char *input)
 		count++;
 		temp_token = strtok(NULL, delim);
 	}
-	free(temp);
-	temp = NULL;
+	if (temp != NULL)
+	{
+		free(temp);
+		temp = NULL;
+	}
 	return (count);
 }

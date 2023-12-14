@@ -43,3 +43,46 @@ int _strncmp(char *s1, char *s2, int n)
 	}
 	return (0);
 }
+
+/**
+ * cmd_is_path - vets the existence of usr cmd
+ * as an executable path
+ * @cmd: pathname of file
+ * Return: 1 on success, otherwise 0.
+ */
+int cmd_is_path(const char *cmd)
+{
+	if (access(cmd, F_OK | X_OK) == -1)
+		return (1);
+	return (0);
+}
+
+void _printf(const char *format, ...)
+{
+	va_list args;
+	va_start(args, format);
+	while (*format)
+	{
+		if (*format == '%' && *(format + 1) == 'd')
+		{
+			int value = va_arg(args, int);
+
+			printf("%d", value);
+			/*move format to the next specifier*/
+			format += 2;
+		}
+		else if (*format == '%' && *(format + 1) == 's')
+		{
+			char *value = va_arg(args, char *);
+			printf("%s", value);
+			/*move format to the next specifier*/
+			format += 2;
+		}
+		else
+		{
+			putchar(*format);
+			format++;
+		}
+	}
+	va_end(args);
+}
