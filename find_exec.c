@@ -12,11 +12,14 @@ int find_exec(char **cmd, char **found_path)
 	char *path_env, *path_token, *full_path;
 	size_t full_path_len;
 
+	if (cmd_is_path(cmd[0]) == 0)
+	{
+		*found_path = strdup(cmd[0]);
+		return (5);
+	}
 	path_env = strdup(getenv("PATH"));
 	if (path_env == NULL)
-	{
 		return (-1);
-	}
 	/* Tokenize the PATH environment variable*/
 	path_token = strtok(path_env, ":");
 	while (path_token != NULL)
