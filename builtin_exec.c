@@ -18,8 +18,8 @@ void builtin_exec(char **cmd_arr, int _case)
 				break;
 			case 1:
 				/*env call*/
-				_env();
-				/*free_buf(cmd_arr, NULL, 0);*/
+				_env(cmd_arr);
+				free_buf(cmd_arr, NULL, 0);
 				break;
 			case 2:
 				/*exit call*/

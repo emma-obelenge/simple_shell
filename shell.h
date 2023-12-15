@@ -20,7 +20,7 @@ char **parser(char *input);
 char *_strcpy(char *src, char *dest);
 char *_strdup(char *str);
 int _strcmp(char *str1, char *str2);
-void _env(void);
+void _env(char **str);
 void _cd(void);
 void _exit(int status);
 void _setenv(void);

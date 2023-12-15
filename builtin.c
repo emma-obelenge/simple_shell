@@ -4,13 +4,24 @@ void _cd(void)
 {
 	printf("cd typed\n");
 }
-void _env(void)
+void _env(char **str)
 {
-	printf("env typed\n");
+	if (str[1])
+	{
+		printf("env: '%s': No such file or directory\n", str[1]);
+	}
+	else
+	{
+		char **env_var = environ;
+		while (*env_var)
+		{
+			printf("%s\n", *env_var);
+			env_var++;
+		}
+	}
 }
 void _exit(int status)
 {
-	printf("exit typed\n");
 	exit(status);
 }
 void _setenv(void)
