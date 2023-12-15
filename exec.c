@@ -1,17 +1,17 @@
 #include "shell.h"
 
 /**
- * cmd_exec - executes a command
- * @input: array of strings containing user input cmd and args
+ * exec - executes a command
+ * @cmd_arr: array of strings containing user input cmd and args
+ * @path: the found_path variable
  *
- * Return: 0 on success, otherwise -1.
  */
 void exec(char **cmd_arr, char *path)
 {
 	pid_t pid;
 	int status;
 	char **env;
-	
+
 	env = environ;
 	pid = fork();
 	if (pid == -1)

@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * free_buf - would free the allocated memory blocks
+ * cmd_arr: the user typed string buff
+ * path: the found path buff
+ * status: value that triggers the respective freeing condition
+ */
 void free_buf(char **cmd_arr, char *path, int status)
 {
 	if (status >= 0 && status <= 2)
@@ -21,14 +27,20 @@ void free_buf(char **cmd_arr, char *path, int status)
 	}
 }
 
+/**
+ * for_path - frees the found_path buff
+ */
 void for_path(char *path)
 {
-	if(path != NULL)
+	if (path != NULL)
 	{
 		free(path);
 	}
 }
 
+/**
+ * for_cmd_arr - frees the cmd_arr buff
+ */
 void for_cmd_arr(char **cmd_arr)
 {
 	if (cmd_arr != NULL)
@@ -43,10 +55,17 @@ void for_cmd_arr(char **cmd_arr)
 		free(cmd_arr);
 	}
 }
-void found_path_dynamic(char *found_path)
+
+/**
+ * found_p - frees the found_path buff
+ */
+
+/*
+   void found_path_dynamic(char *found_path)
 {
 	if (found_path != NULL)
 	{
 		free(found_path);
 	}
 }
+*/

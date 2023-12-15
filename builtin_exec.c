@@ -2,7 +2,7 @@
 /**
  * builtin_exec - Toggles any of the builtin command and
  * places a call to execute them as required
- * @usr_cmd: array of strings of the user typed command
+ * @cmd_arr: array of strings of the user typed command
  * @_case: the case returned by the checker for executing builtin
  */
 void builtin_exec(char **cmd_arr, int _case)
