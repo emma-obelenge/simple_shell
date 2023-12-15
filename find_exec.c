@@ -1,59 +1,49 @@
 #include "shell.h"
 
-/**
- * find_exec - Would check if the user typed command is an executable
- * @cmd: The command typed by the user
- * @exec_path: Variable to contain the path where the executable was found
- * Return: Returns 0 on succes and -1 on failure
- */
-
 int find_exec(char **cmd, char **found_path)
 {
-	char *paths = get_env("PATH");
-	char *paths_token = strtok(paths, ":");
-	char *found_path_dynamic;
-	int paths_token_len, cmd_len, found_path_len;
+	char *path_env, *path_token, *full_path;
+	size_t full_path_len;
 
-	printf("entered find_exec\n");
-	if (cmd_is_path(cmd[0]) == 0)
+	/* Get the value of the PATH environment variable*/
+	path_env = strdup(getenv("PATH"));
+	/* If PATH is not set, return -1*/
+	if (path_env == NULL)
 	{
-		*found_path = _strdup(cmd[0]);
-		printf("path changed to usr def path\n");
-		return (5);
+		return -1;
 	}
-	else if (!(cmd[0] == NULL))
+	/* Tokenize the PATH environment variable*/
+	path_token = strtok(path_env, ":");
+	/* Loop through each tokenized path*/
+	while (path_token != NULL)
 	{
-		while (paths_token != NULL)
+		/*Allocate memory for the full path (path + "/" + cmd)*/
+		full_path_len = strlen(path_token) + 1 + strlen(*cmd) + 1;
+		full_path = (char *)malloc(full_path_len);
+		/*Check if memory allocation is successful*/
+		if (full_path == NULL)
 		{
-			printf("want to find path now\n");
-			paths_token_len = _strlen(paths_token);
-			cmd_len = _strlen(cmd[0]);
-			/*Allocate memory for the full path*/
-			found_path_len = paths_token_len + cmd_len + 2;
-			found_path_dynamic = malloc(found_path_len);
-			if (found_path_dynamic == NULL)
-			{
-				perror("malloc issue for found_path_dynamic in find_exec func");
-				return (-1);
-			}
-			/*Construct the full path*/
-			_strcpy(found_path_dynamic, paths_token);
-			_strapp(found_path_dynamic, "/", found_path_len);
-			_strapp(found_path_dynamic, cmd[0], found_path_len);
-			printf("the merged part is: %s\n", found_path_dynamic);
-			/*Check if the file exists and is executable*/
-			if (access(found_path_dynamic, X_OK) == 0)
-			{
-				*found_path = found_path_dynamic;
-				printf("path was found\n");
-				return (5);
-			}
-			/*Move to the next directory in the PATH*/
-			paths_token = strtok(NULL, ":");
+			perror("Memory allocation error");
+			exit(EXIT_FAILURE);
 		}
-		/*If no executable is found*/
-		free_buf(NULL, found_path_dynamic, 2);
-		printf("path not found\n");
+		/* Construct the full path*/
+		strcpy(full_path, path_token);
+		strcat(full_path, "/");
+		strcat(full_path, *cmd);
+		/* Check if the full path exists and is executable*/
+		if (access(full_path, X_OK) == 0)
+		{
+			*found_path = full_path;
+			free(path_env);
+			return 5;
+		}
+		/*Free the memory for full path and path_token*/
+		free(full_path);
+		/* Move to the next tokenized path*/
+		path_token = strtok(NULL, ":");
 	}
-	return (-1);
+	/* No executable found in any path*/
+	free(path_env);
+	free(path_token);
+	return -1;
 }

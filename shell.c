@@ -12,22 +12,21 @@ int main(void)
 	while (true)
 	{
 		int checker_report = -1, builtin_value = -1;
-		int *value = &builtin_value, i = 0;
+		int *value = &builtin_value;
 
 		usr_input = prompt();
 		if (usr_input == NULL)
 			continue;
 		cmd_arr = parser(usr_input);
-		for (; cmd_arr[i]; i++)
-			printf("cmd_arr[%d] is: %s", i, cmd_arr[i]);
 		checker_report = checker(cmd_arr, value);
 		if (checker_report == 0)
 		{
 			builtin_exec(cmd_arr, builtin_value);
+			continue;
 		}
 		else
 		{
-			builtin_value = find_exec(cmd_arr, &found_path);
+			builtin_value = find_exec(&cmd_arr[0], &found_path);
 		}
 			/*cmd_exe*/
 		if (builtin_value == 5)
