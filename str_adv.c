@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ * _strtok - tokenizes the user input string
+ * @str: the string taken as parameter
+ * @delim: the parameter taken by the strtok funciion
+ *
+ * Return: char pointer to the tokenized string
+ */
 char *_strtok(char *str, char delim)
 {
 	/* Keeping track of the position in the string*/

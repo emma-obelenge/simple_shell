@@ -33,7 +33,7 @@ int _putchar(char c)
  */
 int _strncmp(char *s1, char *s2, int n)
 {
-	while(n > 0)
+	while (n > 0)
 	{
 		if (*s1 != *s2)
 			return (*s1 - *s2);
@@ -57,9 +57,15 @@ int cmd_is_path(const char *cmd)
 	return (0);
 }
 
+/**
+ * _printf - custom printf function
+ * can only handle int and string variables
+ * @format: variadic parameter
+ */
 void _printf(const char *format, ...)
 {
 	va_list args;
+
 	va_start(args, format);
 	while (*format)
 	{
@@ -74,6 +80,7 @@ void _printf(const char *format, ...)
 		else if (*format == '%' && *(format + 1) == 's')
 		{
 			char *value = va_arg(args, char *);
+
 			printf("%s", value);
 			/*move format to the next specifier*/
 			format += 2;

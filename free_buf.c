@@ -2,9 +2,9 @@
 
 /**
  * free_buf - would free the allocated memory blocks
- * cmd_arr: the user typed string buff
- * path: the found path buff
- * status: value that triggers the respective freeing condition
+ * @cmd_arr: the user typed string buff
+ * @path: the found path buff
+ * @status: value that triggers the respective freeing condition
  */
 void free_buf(char **cmd_arr, char *path, int status)
 {
@@ -19,7 +19,7 @@ void free_buf(char **cmd_arr, char *path, int status)
 				for_path(path);
 				break;
 			case 2:
-				found_path_dynamic(path);
+				/*found_path_dynamic(path);*/
 				break;
 			default:
 				break;
@@ -29,6 +29,7 @@ void free_buf(char **cmd_arr, char *path, int status)
 
 /**
  * for_path - frees the found_path buff
+ * @path: the path variable taken as input
  */
 void for_path(char *path)
 {
@@ -40,6 +41,7 @@ void for_path(char *path)
 
 /**
  * for_cmd_arr - frees the cmd_arr buff
+ * @cmd_arr: the cmd arr entered
  */
 void for_cmd_arr(char **cmd_arr)
 {
@@ -55,17 +57,3 @@ void for_cmd_arr(char **cmd_arr)
 		free(cmd_arr);
 	}
 }
-
-/**
- * found_p - frees the found_path buff
- */
-
-/*
-   void found_path_dynamic(char *found_path)
-{
-	if (found_path != NULL)
-	{
-		free(found_path);
-	}
-}
-*/

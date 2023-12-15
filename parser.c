@@ -57,7 +57,7 @@ int tok_count(char *input)
 	char *temp_token, *temp = NULL;
 	int count;
 	char delim[] = " ";
-	
+
 	temp = _strdup(input);
 	temp_token = strtok(temp, delim);
 	count = 0;

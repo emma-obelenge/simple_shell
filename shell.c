@@ -8,7 +8,8 @@
 int main(void)
 {
 	char **cmd_arr = NULL;
-	char *usr_input = NULL, *found_path = NULL; 
+	char *usr_input = NULL, *found_path = NULL;
+
 	while (true)
 	{
 		int checker_report = -1, builtin_value = -1;

@@ -35,7 +35,7 @@ char *prompt(void)
 
 /**
  * input - get user input from stdin
- *
+ * @input_str: the string typed by the user
  * Return: the user input
  */
 int input(char **input_str)
