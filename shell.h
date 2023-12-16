@@ -44,5 +44,6 @@ int cmd_is_path(const char *cmd);
 void exec(char **cmd_arr, char *path);
 /*void found_path_dynamic(char *found_path);*/
 void _printf(const char *format, ...);
+int print_prompt(void);
 
 #endif

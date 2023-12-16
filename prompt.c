@@ -6,12 +6,12 @@
  */
 char *prompt(void)
 {
-	const char *content = "cisfun$ ";
 	char *input_str = NULL;
 	int str_len;
 	ssize_t bytes;
 
-	bytes = write(1, content, _strlen(content));
+	if (isatty(STDIN_FILENO))
+		bytes = print_prompt();
 	if (bytes == -1)
 	{
 		perror("prompt display failed");
@@ -31,6 +31,21 @@ char *prompt(void)
 		return (NULL);
 	}
 	return (input_str);
+}
+/**
+ * print_prompt - the prompt itself
+ *
+ * Return: 0 on success, and -1 on failure
+ */
+int print_prompt(void)
+{
+	const char *content = "cisfun$ ";
+	ssize_t bytes;
+
+	bytes = write(1, content, _strlen(content));
+	if (bytes == -1)
+		return (-1);
+	return (0);
 }
 
 /**
